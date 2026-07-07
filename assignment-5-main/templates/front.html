@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Air Quality Monitor</title>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+		<meta http-equiv="refresh" content="60">
+	</head>
+	<body>
+
+		<nav>
+			<ul class="nav-links">
+				<li><a href="/" class="active">Overview</a></li>
+				<li><a href="/measurements">All Measurements</a></li>
+			</ul>
+		</nav>
+
+		<div class="hero">
+			<h1>Air Quality<br><strong>Monitor Device</strong></h1>
+		</div>
+
+		<main>
+
+			<p class="section-label">Latest Measurements</p>
+			<div class="measurement-row">
+				<span class="measurement-label">CO₂</span>
+				<span>
+					<span class="measurement-value">{{ latest.co2 }}</span>
+					<span class="measurement-unit">ppm</span>
+					<span class="measurement-time">{{ latest.timestamp }}</span>
+				</span>
+			</div>
+			<div class="measurement-row">
+				<span class="measurement-label">TVOC</span>
+				<span>
+					<span class="measurement-value">{{ latest.tvoc }}</span>
+					<span class="measurement-unit">ppb</span>
+					<span class="measurement-time">{{ latest.timestamp }}</span>
+				</span>
+			</div>
+
+			<p class="section-label">Min / Max</p>
+			<div class="minmax-grid">
+				<div class="col">
+					<p class="section-label">Minimum</p>
+					<div class="measurement-row">
+						<span class="measurement-label">CO₂</span>
+						<span>
+							<span class="measurement-value">{{ min_vals.co2 }}</span>
+							<span class="measurement-unit">ppm</span>
+							<span class="measurement-time">{{ min_vals.co2_timestamp }}</span>
+						</span>
+					</div>
+					<div class="measurement-row">
+						<span class="measurement-label">TVOC</span>
+						<span>
+							<span class="measurement-value">{{ min_vals.tvoc }}</span>
+							<span class="measurement-unit">ppb</span>
+							<span class="measurement-time">{{ min_vals.tvoc_timestamp }}</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="col">
+					<p class="section-label">Maximum</p>
+					<div class="measurement-row">
+						<span class="measurement-label">CO₂</span>
+						<span>
+							<span class="measurement-value">{{ max_vals.co2 }}</span>
+							<span class="measurement-unit">ppm</span>
+							<span class="measurement-time">{{ max_vals.co2_timestamp }}</span>
+						</span>
+					</div>
+					<div class="measurement-row">
+						<span class="measurement-label">TVOC</span>
+						<span>
+							<span class="measurement-value">{{ max_vals.tvoc }}</span>
+							<span class="measurement-unit">ppb</span>
+							<span class="measurement-time">{{ max_vals.tvoc_timestamp }}</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Air Quality Monitor</title>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<nav>
+			<ul class="nav-links">
+				<li><a href="/">Overview</a></li>
+				<li><a href="/measurements" class="active">All Measurements</a></li>
+			</ul>
+		</nav>
+
+		<div class="hero">
+			<h1>Air Quality<br><strong>Monitor Device</strong></h1>
+		</div>
+		<main>
+			{% if measurements %}
+			<p class="section-label">{{ measurements | length }} records</p>
+			<table>
+				<thead>
+					<tr>
+						<th>CO₂ (ppm)</th>
+						<th>TVOC (ppb)</th>
+						<th>Timestamp</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for measurement in measurements %}
+					<tr>
+						<td>{{ measurement.co2 }}</td>
+						<td>{{ measurement.tvoc }}</td>
+						<td>{{ measurement.timestamp }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<p class="section-label">No measurements recorded yet</p>
+			{% endif %}
+
+
+			<div class="pagination">
+   			 {% if page > 1 %}
+        <a href="/measurements?page={{ page - 1 }}">← Previous</a>
+   		 {% endif %}
+    		<span>Page {{ page }} of {{ total_pages }}</span>
+    		{% if page < total_pages %}
+        	<a href="/measurements?page={{ page + 1 }}">Next →</a>
+    		{% endif %}
+			</div>
+		</main>
+	</body>
+</html>
